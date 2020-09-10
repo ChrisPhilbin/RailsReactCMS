@@ -17,6 +17,7 @@ const Posts = (props) => {
                 throw new Error("Network response not ok")
             })
             .then(response => setPosts(posts.concat(response)))
+            .then(console.log(posts, "POSTS"))
             .catch(() => this.props.history.push('/'))
     }, [])
 
