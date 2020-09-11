@@ -1,9 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const NewPost = (props) => {
 
-    const [postTitle, setPostTitle] = useState("")
-    const [postBody, setPostBody]   = useState("")
+    const [postTitle, setPostTitle]   = useState("")
+    const [postBody, setPostBody]     = useState("")
+    const [categories, setCategories] = useState([])
+
+    const getCategories = () => {
+        const url = '/api/v1/categories'
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error("Network response not ok")
+            })
+            .then(response => setCategories(categories.concat(response)))
+    }
+
+    useEffect(() => {
+        getCategories()
+    }, [])
 
     const onFormSubmit = (event) => {
         event.preventDefault()
@@ -15,7 +32,8 @@ const NewPost = (props) => {
         const requestBody = {
             title: postTitle,
             body: postBody,
-            user_id: props.user_id
+            user_id: props.user_id,
+            category_id: 1
         }
 
         const token = document.querySelector('meta[name="csrf-token"]').content
@@ -43,6 +61,12 @@ const NewPost = (props) => {
 
         <div>
             <form onSubmit={onFormSubmit}>
+                <div className="form-group">
+                    <label htmlFor="postCategory">Category</label>
+                    <select className="form-control">
+                        {categories.map(category => <option value={category.id}>{category.name}</option>)}
+                    </select>
+                </div>
                 <div className="form-group">
                     <label htmlFor="postTitle">Post Title</label>
                     <input type="text" className="form-control" name="postTitle" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
