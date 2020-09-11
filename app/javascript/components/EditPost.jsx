@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import getCategories from '../actions/CategoriesActions'
 
 const EditPost = (props) => {
 
@@ -6,6 +7,8 @@ const EditPost = (props) => {
 
     const [postTitle, setPostTitle] = useState("")
     const [postBody, setPostBody] = useState("")
+    const [postCategory, setPostCategory] = useState("") //variable for original value of the post
+    const [postCategories, setPostCategories] = useState([]) //variable containing all categories to potentially reassign post to
 
     useEffect (() => { 
         const url = '/api/v1/show/' + post_id
@@ -16,9 +19,13 @@ const EditPost = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => (setPostTitle(response.title), setPostBody(response.body)))
+            .then(response => (setPostTitle(response.title), setPostBody(response.body), setPostCategory(response.category_id)))
     }, [])
 
+    useEffect(() => {
+        setPostCategory(getCategories())
+        console.log(postCategories, "POST CATEGORIES FROM EDIT FORM")
+    }, [])
 
     const onFormSubmit = (event) => {
         event.preventDefault()
@@ -30,6 +37,7 @@ const EditPost = (props) => {
         const requestBody = {
             title: postTitle,
             body: postBody,
+            category_id: postCategory,
             user_id: props.user_id
         }
 
@@ -58,6 +66,10 @@ const EditPost = (props) => {
 
         <div>
         <form onSubmit={onFormSubmit}>
+            <div className="form-group">
+                <label htmlFor="postCategory">Category</label>
+                <select></select>
+            </div>
             <div className="form-group">
                 <label htmlFor="postTitle">Post Title</label>
                 <input type="text" className="form-control" name="postTitle" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
