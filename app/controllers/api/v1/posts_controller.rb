@@ -27,7 +27,9 @@ class Api::V1::PostsController < ApplicationController
 
   def show
     if post
-      render json: post
+      posted_by = User.find(post.user_id).email
+      posted_in = Category.find(post.category_id).name
+      render json: { post: post, posted_by: posted_by, posted_in: posted_in } 
     else
       render json: post.errors
     end

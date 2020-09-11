@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button'
 
 const Post = (props) => {
 
-    console.log(props, "PROPS FROM POST.JSX")
-
     const [post, setPost] = useState({})
 
     useEffect (() => { 
@@ -19,12 +17,13 @@ const Post = (props) => {
             })
             .then(response => setPost(response))
             .catch(() => this.props.history.push('/posts'))
-    }, [])
+    }, [post])
 
     const showPost = (
-        <div key={props.id}>
-            <strong>{post.title}</strong><br />
-            <p>{post.body}</p>
+        <div key={post.post.id}>
+            <strong><h1>{post.post.title}</h1></strong><br />
+            <i>posted by {post.posted_by} in {post.posted_in}</i>
+            <p>{post.post.body}</p>
         </div>
     )
 
@@ -58,6 +57,7 @@ const Post = (props) => {
 
     return(
         <>
+        {console.log(post, "SHOWING WHATS INSIDE POST VAR")}
             <div>
                 {props.user_id != "not_signed_in" ? editButtons : signInButton}
                 {showPost}
