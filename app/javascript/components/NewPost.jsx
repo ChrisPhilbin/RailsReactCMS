@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 const NewPost = (props) => {
 
-    const [postTitle, setPostTitle]   = useState("")
-    const [postBody, setPostBody]     = useState("")
-    const [categories, setCategories] = useState([])
+    const [postTitle, setPostTitle]               = useState("")
+    const [postBody, setPostBody]                 = useState("")
+    const [selectedCategory, setSelectedCategory] = useState("")
+    const [categories, setCategories]             = useState([])
 
     const getCategories = () => {
         const url = '/api/v1/categories'
@@ -33,7 +34,7 @@ const NewPost = (props) => {
             title: postTitle,
             body: postBody,
             user_id: props.user_id,
-            category_id: 1
+            category_id: selectedCategory
         }
 
         const token = document.querySelector('meta[name="csrf-token"]').content
@@ -63,8 +64,8 @@ const NewPost = (props) => {
             <form onSubmit={onFormSubmit}>
                 <div className="form-group">
                     <label htmlFor="postCategory">Category</label>
-                    <select className="form-control">
-                        {categories.map(category => <option value={category.id}>{category.name}</option>)}
+                    <select className="form-control" onChange={(e) => setSelectedCategory(e.target.value)}>
+                        {categories.map(category => <option value={category.id} key={category.id}>{category.name}</option>)}
                     </select>
                 </div>
                 <div className="form-group">

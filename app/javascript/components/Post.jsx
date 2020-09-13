@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 
 const Post = (props) => {
 
-    const [post, setPost] = useState({})
+    const [post, setPost] = useState({postDetails: {}, postedBy: '', postedIn: '', loaded: false})
 
     useEffect (() => { 
         const url = '/api/v1/show/' + props.id
@@ -15,17 +15,8 @@ const Post = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => setPost(response))
-            .catch(() => this.props.history.push('/posts'))
-    }, [post])
-
-    const showPost = (
-        <div key={post.post.id}>
-            <strong><h1>{post.post.title}</h1></strong><br />
-            <i>posted by {post.posted_by} in {post.posted_in}</i>
-            <p>{post.post.body}</p>
-        </div>
-    )
+            .then(response => setPost({postDetails: response.post, postedBy: response.posted_by, postedIn: response.posted_in, loaded: true}))
+    }, [])
 
     const editButtons = (
         <div>
@@ -38,7 +29,12 @@ const Post = (props) => {
             <a href="/uses/sign_in"><Button className="btn btn-primary">Sign in</Button></a>
         </div>
     )
-
+    
+    const showLoading = (
+        <div>
+            <h1>Loading... Please Wait...</h1>
+        </div>
+    )
     const token = document.querySelector('meta[name="csrf-token"]').content
 
     const deletePost = () => {
@@ -55,15 +51,31 @@ const Post = (props) => {
         }
     }
 
-    return(
-        <>
-        {console.log(post, "SHOWING WHATS INSIDE POST VAR")}
-            <div>
-                {props.user_id != "not_signed_in" ? editButtons : signInButton}
-                {showPost}
-            </div>
-        </>
-    )
+    if (post.loaded == false) {
+        return(
+            <>
+            {console.log(post.postedBy, "SHOWING WHATS INSIDE POST VAR")}
+                <div>
+                    {showLoading}
+                </div>
+            </>
+        )
+    }
+
+    if (post.loaded == true) {
+        return(
+            <>
+                <div>
+                    {props.user_id != "not_signed_in" ? editButtons : signInButton}
+                    <div key={post.postDetails.id}>
+                        <strong>{post.postDetails.title}</strong><br />
+                        <i>posted by {post.postedBy} in {post.postedIn}</i>
+                        <p>{post.postDetails.body}</p>
+                    </div>
+                </div>
+            </>
+        )
+    }
 
 }
 
