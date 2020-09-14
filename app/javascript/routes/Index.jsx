@@ -25,8 +25,8 @@ const Routes = (props) => {
         <Route exact path="/posts/:id" render={ (props) => <Post id={props.match.params.id} user_id={id} />} />
         <Route exact path="/posts/:id/edit" render={ (props) => <EditPost id={props.match.params.id} />} />
         <Route exact path="/categories" render={ () => <Categories />} />
-        <Route exact path="/categories/:id" render={ (props) => <Category category_id={props.match.params.id} />} />
         <Route exact path="/categories/new" render={ () => <NewCategory />} />
+        <Route exact path="/categories/:id" render={ (props) => <Category category_id={props.match.params.id} />} />
       </Switch>
     </Router>
   )

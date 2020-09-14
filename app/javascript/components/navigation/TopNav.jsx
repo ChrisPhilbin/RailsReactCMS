@@ -26,17 +26,20 @@ const TopNav = (props) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/posts">Posts</Nav.Link>
-                    <Nav.Link href="/categories">Categories</Nav.Link>
-                    <Nav.Link href="/categories/new">New Category</Nav.Link>
-                    {user_id != "not_signed_in" ? signout_button : signin_button}
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                    <NavDropdown title="Posts" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/posts">All posts</NavDropdown.Item>
+                        {user_id != "not_signed_in" ? <NavDropdown.Item href="/posts/new">Create new post</NavDropdown.Item> : nil}
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
+
+                    <NavDropdown title="Categories" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/categories">All Categories</NavDropdown.Item>
+                        {user_id != "not_signed_in" ? <NavDropdown.Item href="/categories/new">Create new category</NavDropdown.Item> : nil}
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    </NavDropdown>
+                    {user_id != "not_signed_in" ? signout_button : signin_button}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>            
