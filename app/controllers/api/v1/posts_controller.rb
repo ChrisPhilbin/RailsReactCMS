@@ -1,6 +1,6 @@
 class Api::V1::PostsController < ApplicationController
 
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy, :update]
 
   def index
     posts = Post.all.order(created_at: :desc)
@@ -14,7 +14,7 @@ class Api::V1::PostsController < ApplicationController
      else
       render json: posts.errors
      end
-    end
+  end
 
   def create
     post = Post.create!(post_params)

@@ -30,9 +30,16 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def destroy
-  
+    category&.destroy
+    render json: {message: 'Category deleted!'}
   end
 
+  def update
+    category = Category.find(params[:id])
+    category.update(name: params[:name])
+    render json: category
+  end
+  
   private
 
     def category_params
