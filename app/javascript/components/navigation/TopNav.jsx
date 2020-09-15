@@ -39,6 +39,8 @@ const TopNav = (props) => {
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
+                    <Nav.Link href="/">About</Nav.Link>
+                    <Nav.Link href="/">Contact</Nav.Link>
                     {user_id != "not_signed_in" ? signout_button : signin_button}
                     </Nav>
                 </Navbar.Collapse>
