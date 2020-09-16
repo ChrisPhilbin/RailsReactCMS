@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       delete '/destroy/:id', to: 'posts#destroy'
       get    '/categories',  to: 'categories#index'
       get    '/categories/:id', to: 'categories#show'
+      delete '/categories/:id', to: 'categories#destroy'
       post   '/categories/create', to: 'categories#create'
       # patch '/edit/:id', to: 'posts#update'
     end

@@ -1,3 +1,5 @@
+require 'pry'
+
 class Api::V1::CategoriesController < ApplicationController
 
   before_action :authenticate_user!, only: [:create, :destroy]
@@ -44,6 +46,10 @@ class Api::V1::CategoriesController < ApplicationController
 
     def category_params
         params.require(:category).permit(:name)
+    end
+
+    def category
+      @category ||= Category.find(params[:id])
     end
 
   end

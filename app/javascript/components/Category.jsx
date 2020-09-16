@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 const Category = (props) => {
 
@@ -19,6 +20,22 @@ const Category = (props) => {
             .then(response => (setPosts(posts.concat(response.posts)), setCategory(response.name)))
     }, [])
 
+    const token = document.querySelector('meta[name="csrf-token"]').content
+
+    const deleteCategory = () => {
+        if (confirm("WARNING! Removing this category will also remove all posts associated with it!")) {
+            let deleted = {
+                method: "DELETE",
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRF-Token': token
+                }
+            }
+            fetch('/api/v1/categories/'+props.category_id, deleted)
+            .then(alert("Category deleted"))
+        }
+    }
+
     const allPosts = posts.map((post, index) => (
         <div key={index} className="col-md-6 col-lg-4">
             <div className="card mb-4">
@@ -30,6 +47,7 @@ const Category = (props) => {
             </div>
         </div>
     ))
+
     const noPosts = (
         <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
             <h4>
@@ -38,9 +56,14 @@ const Category = (props) => {
         </div>
     )
 
+    const deleteCategoryButton = (
+        <Button className="btn btn-primary" onClick={deleteCategory}>Delete category</Button>
+    )
+
     return(
         <>
             <h3>{category} - Showing all posts</h3>
+            {deleteCategoryButton}
             <div className="py-5">
                     <div className="row">
                         {posts.length > 0 ? allPosts : noPosts}

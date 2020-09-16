@@ -28,14 +28,14 @@ const TopNav = (props) => {
                     <Nav.Link href="/">Home</Nav.Link>
                     <NavDropdown title="Posts" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/posts">All posts</NavDropdown.Item>
-                        {user_id != "not_signed_in" ? <NavDropdown.Item href="/posts/new">Create new post</NavDropdown.Item> : nil}
+                        {user_id != "not_signed_in" ? <NavDropdown.Item href="/posts/new">Create new post</NavDropdown.Item> : <></>}
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Categories" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/categories">All Categories</NavDropdown.Item>
-                        {user_id != "not_signed_in" ? <NavDropdown.Item href="/categories/new">Create new category</NavDropdown.Item> : nil}
+                        {user_id != "not_signed_in" ? <NavDropdown.Item href="/categories/new">Create new category</NavDropdown.Item> : <></>}
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
