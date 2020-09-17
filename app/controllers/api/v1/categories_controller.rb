@@ -31,9 +31,19 @@ class Api::V1::CategoriesController < ApplicationController
     end
   end
 
+  # def destroy
+  #   category&.destroy
+  #   render json: {message: 'Category deleted!'}
+  # end
+
   def destroy
-    category&.destroy
-    render json: {message: 'Category deleted!'}
+    if params[:id] == 1
+      render json: {message: "Cannot remove default category!"}
+    end
+    category = Category.find(params[:id])
+    category.posts.destroy_all
+    category.delete
+    render json: {message: "Category deleted!"}
   end
 
   def update
@@ -46,10 +56,6 @@ class Api::V1::CategoriesController < ApplicationController
 
     def category_params
         params.require(:category).permit(:name)
-    end
-
-    def category
-      @category ||= Category.find(params[:id])
     end
 
   end
