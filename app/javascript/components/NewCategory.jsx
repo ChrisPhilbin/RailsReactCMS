@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
+import {withRouter} from 'react-router-dom'
 
-const NewCategory = () => {
+const NewCategory = (props) => {
 
     const [categoryName, setCategoryName] = useState("")
 
@@ -35,6 +36,7 @@ const NewCategory = () => {
                 throw new Error("Network response not ok")
             })
             .then(response => this.props.history.push('/category/'+response.id))
+            .then(props.history.push('/categories/'))
             .catch(error => console.log(error.message))
     }
 
@@ -55,4 +57,4 @@ const NewCategory = () => {
 
 }
 
-export default NewCategory
+export default withRouter(NewCategory)

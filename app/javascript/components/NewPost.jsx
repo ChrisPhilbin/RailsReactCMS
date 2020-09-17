@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 const NewPost = (props) => {
 
+    console.log(props)
+
     const [postTitle, setPostTitle]               = useState("")
     const [postBody, setPostBody]                 = useState("")
     const [selectedCategory, setSelectedCategory] = useState("")
@@ -54,7 +56,7 @@ const NewPost = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => this.props.history.push('/post/'+response.id))
+            .then(props.props.history.push('/'))
             .catch(error => console.log(error.message))
     }
 
