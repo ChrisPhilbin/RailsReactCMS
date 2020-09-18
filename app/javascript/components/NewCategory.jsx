@@ -35,7 +35,6 @@ const NewCategory = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => this.props.history.push('/category/'+response.id))
             .then(props.history.push('/categories/'))
             .catch(error => console.log(error.message))
     }

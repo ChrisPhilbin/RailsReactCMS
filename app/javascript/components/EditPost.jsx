@@ -19,12 +19,20 @@ const EditPost = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => (setPostTitle(response.title), setPostBody(response.body), setPostCategory(response.category_id)))
+            .then(response => (setPostTitle(response.title)))
+            .then(console.log(response.title, "TITLE OF POST"))
     }, [])
 
     useEffect(() => {
-        setPostCategory(getCategories())
-        console.log(postCategories, "POST CATEGORIES FROM EDIT FORM")
+        const url = '/api/v1/categories'
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error("Network response not ok")
+            })
+            .then(response => (setPostCategories(response)))
     }, [])
 
     const onFormSubmit = (event) => {
@@ -58,13 +66,13 @@ const EditPost = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => this.props.history.push('/post/'+response.id))
+            .then(props.history.push('/post/'+post_id))
             .catch(error => console.log(error.message))
     }
 
     return(
 
-        <div>
+        <div key={props.id}>
         <form onSubmit={onFormSubmit}>
             <div className="form-group">
                 <label htmlFor="postCategory">Category</label>
@@ -72,7 +80,7 @@ const EditPost = (props) => {
             </div>
             <div className="form-group">
                 <label htmlFor="postTitle">Post Title</label>
-                <input type="text" className="form-control" name="postTitle" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
+                <input type="text" className="form-control" name="postTitle" defaultValue={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
             </div>
             <div className="form-group">
                 <label htmlFor="postBody">Post Body</label>
