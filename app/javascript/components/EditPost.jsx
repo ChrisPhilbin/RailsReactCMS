@@ -19,8 +19,7 @@ const EditPost = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => (setPostTitle(response.title)))
-            .then(console.log(response.title, "TITLE OF POST"))
+            .then(response => (setPostTitle(response.post.title), setPostBody(response.post.body), setPostCategory(response.posted_in)))
     }, [])
 
     useEffect(() => {
@@ -32,8 +31,11 @@ const EditPost = (props) => {
                 }
                 throw new Error("Network response not ok")
             })
-            .then(response => (setPostCategories(response)))
+            .then(response => setPostCategories(response))
     }, [])
+
+    console.log(postCategories, "post categories")
+    console.log(postCategory, "posted in this category")
 
     const onFormSubmit = (event) => {
         event.preventDefault()
@@ -76,7 +78,11 @@ const EditPost = (props) => {
         <form onSubmit={onFormSubmit}>
             <div className="form-group">
                 <label htmlFor="postCategory">Category</label>
-                <select></select>
+                <select defaultValue={postCategory}>
+                    {postCategories.map((category) => (
+                        <option value={category.id} key={category.id}>{category.name}</option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label htmlFor="postTitle">Post Title</label>
@@ -84,7 +90,7 @@ const EditPost = (props) => {
             </div>
             <div className="form-group">
                 <label htmlFor="postBody">Post Body</label>
-                <textarea name="postBody" className="form-control" value={postBody} onChange={(e) => setPostBody(e.target.value)}></textarea>
+                <textarea name="postBody" className="form-control" defaultValue={postBody} onChange={(e) => setPostBody(e.target.value)}></textarea>
             </div>
             <button type="submit" className="btn btn-primary" onClick={onFormSubmit}>Submit</button>
         </form>
