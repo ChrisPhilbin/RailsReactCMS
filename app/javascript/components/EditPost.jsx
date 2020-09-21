@@ -72,16 +72,20 @@ const EditPost = (props) => {
             .catch(error => console.log(error.message))
     }
 
+    const displaySelect = (
+        postCategories.map((category) => (
+            <option value={category.id} key={category.id}>{category.name}</option>
+        ))
+    )
+
     return(
 
         <div key={props.id}>
         <form onSubmit={onFormSubmit}>
             <div className="form-group">
                 <label htmlFor="postCategory">Category</label>
-                <select defaultValue={postCategory}>
-                    {postCategories.map((category) => (
-                        <option value={category.id} key={category.id}>{category.name}</option>
-                    ))}
+                <select defaultValue={postCategory} name="postCategory" onChange={(e) => setPostCategory(e.target.value)}>
+                    {displaySelect}
                 </select>
             </div>
             <div className="form-group">
