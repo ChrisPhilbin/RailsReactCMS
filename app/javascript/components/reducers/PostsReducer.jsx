@@ -18,7 +18,7 @@ export default function postsReducer(state = initialState, action) {
         case actions.GET_POSTS:
             return { ...state, loading: true}
         case actions.GET_POSTS_SUCCESS:
-            return { ...state, loading: false, hasErrors: false, allPosts: allPosts.concat(action.payload)}
+            return { ...state, loading: false, hasErrors: false, allPosts: state.allPosts.concat(action.payload)}
         case actions.GET_POSTS_FAILURE:
             return { ...state, hasErrors: true}
         default:
