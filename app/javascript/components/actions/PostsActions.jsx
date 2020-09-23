@@ -1,35 +1,53 @@
-export const GET_POST = "GET_POST"
-export const GET_POST_SUCCESS = "GET_POST_SUCCESS"
-export const GET_POST_FAILURE = "GET_POST_FAILURE"
+export const GET_SINGLE_POST = "GET_SINGLE_POST"
+export const GET_SINGLE_POST_SUCCESS = "GET_SINGLE_POST_SUCCESS"
+export const GET_SINGLE_POST_FAILURE = "GET_SINGLE_POST_FAILURE"
+
 export const GET_POSTS = "GET_POSTS"
 export const GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS"
 export const GET_POSTS_FAILURE = "GET_POSTS_FAILURE"
 
-//Rename the above exports???
-
-
-//MULTIPLE POSTS
-
-
-export const getPost = () => (
-    { type: GET_POST }
+//SINGLE POSTS
+export const getSinglePost = () => (
+    { type: GET_SINGLE_POST }
 )
 
-export const getPostSuccess = (post) => (
-    { type: GET_POST_SUCCESS, payload: post }
+export const getSinglePostSuccess = (post) => (
+    { type: GET_SINGLE_POST_SUCCESS, payload: post }
 )
 
-export const getPostFailure = () => (
-    { type: GET_POST_FAILURE }
+export const getSinglePostFailure = () => (
+    { type: GET_SINGLE_POST_FAILURE }
 )
 
-export const fetchPost = (post_id) => {
+export const fetchSinglePost = (post_id) => {
     return (dispatch) => {
-        dispatch(getPost())
+        dispatch(getSinglePost())
             fetch('/api/v1/post/'+post_id)
             .then(response => response.json())
             .then(data => dispatch(getPostSuccess(data)))
+            .catch(getSinglePostFailure())
     }
 }
 
-//SINGLE POST
+//MULTIPLE POSTS FROM A SPECIFIC CATEGORY
+export const getPosts = () => (
+    { type: GET_POSTS }
+)
+
+export const getPostsSuccess = (posts) => (
+    { type: GET_POSTS_SUCCESS, payload: posts }
+)
+
+export const getPostsFailure = () => (
+    { type: GET_POSTS_FAILURE }
+)
+
+export const fetchPosts = (category_id) => {
+    return (dispatch) => {
+        dispatch(getPosts())
+            fetch('/api/v1/categories/'+category_id)
+            .then(response => response.json())
+            .then(data => dispatch(getPostSuccess(data.posts)))
+            .catch(getPostsFailure())
+    }
+}
