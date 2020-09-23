@@ -25,6 +25,7 @@ export function fetchCategories() {
             fetch('/api/v1/categories')
             .then(response => response.json())
             .then(data => dispatch(getCategoriesSuccess(data)))
+            .catch(getCategoriesFailure())
     }
 }
 
@@ -48,5 +49,6 @@ export function fetchCategory(category_id) {
             fetch('/api/v1/categories/'+category_id)
             .then(response => response.json())
             .then(data => dispatch(getCategorySuccess(data)))
+            .catch(getCategoryFailure())
     }
 }
