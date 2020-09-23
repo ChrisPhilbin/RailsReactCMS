@@ -51,3 +51,13 @@ export const fetchPosts = (category_id) => {
             .catch(getPostsFailure())
     }
 }
+
+export const fetchLatestPosts = () => {
+    return (dispatch) => {
+        dispatch(getPosts())
+            fetch('api/v1/posts/latest')
+            .then(response => response.json())
+            .then(data => dispatch(getPostsSuccess(data)))
+            .catch(getPostsFailure())
+    }
+}
