@@ -22,9 +22,9 @@ export const getSinglePostFailure = () => (
 export const fetchSinglePost = (post_id) => {
     return (dispatch) => {
         dispatch(getSinglePost())
-            fetch('/api/v1/post/'+post_id)
+            fetch('/api/v1/show/'+post_id)
             .then(response => response.json())
-            .then(data => dispatch(getPostSuccess(data)))
+            .then(data => dispatch(getSinglePostSuccess(data)))
             .catch(getSinglePostFailure())
     }
 }
