@@ -61,3 +61,19 @@ export const fetchLatestPosts = () => {
             .catch(getPostsFailure())
     }
 }
+
+//DELETE A POST
+
+export const deletePost = (token, post_id) => {
+    if (confirm('Are you sure you want to delete this post?')) {
+        let deleted = {
+            method: "DELETE",
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-Token': token
+            }
+        }
+        fetch('/api/v1/destroy/'+post_id, deleted)
+        .then(alert("Post deleted"))
+    }
+}

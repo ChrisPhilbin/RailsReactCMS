@@ -84,10 +84,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSinglePost } from './actions/PostsActions'
+import {getToken} from './actions/SessionActions'
 
 const Post = (props) => {
 
     const dispatch = useDispatch()
+    const token = getToken()
 
     useEffect(() => {
         dispatch(fetchSinglePost(props.id))
@@ -99,10 +101,40 @@ const Post = (props) => {
     const loading      = useSelector(state => state.posts.loading)
     const hasErrors    = useSelector(state => state.posts.hasErrors)
 
+    let showPost
+    let showLoading
+    let showErrors
+
+    if (post) {
+        showPost = (
+            <div>
+                <strong>{post.title}</strong> <i>posted by {posted_by} in {posted_in}</i>
+                <br />
+                {post.body}
+            </div>
+        )
+    }
+
+    if (loading) {
+        showLoading = (
+            <div>
+                <h3>Loading... Please wait</h3>
+            </div>
+        )
+    }
+
+    if (hasErrors) {
+        showErrors = (
+            <div>
+                <h3>Something went wrong... Please try again</h3>
+            </div>
+        )
+    }
     return(
         <>
-            <h3>Post page...</h3>
-            posted by: {posted_by}
+            {showLoading}
+            {showErrors}
+            {showPost}
         </>
     )
 }
