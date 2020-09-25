@@ -26,7 +26,7 @@
 
 //     const signInButton = (
 //         <div>
-//             <a href="/uses/sign_in"><Button className="btn btn-primary">Sign in</Button></a>
+//             <a href="/user/sign_in"><Button className="btn btn-primary">Sign in</Button></a>
 //         </div>
 //     )
     
@@ -134,7 +134,6 @@ const Post = (props) => {
     }
     return(
         <>
-            {console.log(loggedIn, "logged in value")}
             {showLoading}
             {showErrors}
             {showPost}
