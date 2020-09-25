@@ -85,11 +85,13 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSinglePost } from './actions/PostsActions'
 import {getToken} from './actions/SessionActions'
+import {isLoggedIn} from './actions/SessionActions'
 
 const Post = (props) => {
 
     const dispatch = useDispatch()
     const token = getToken()
+    const loggedIn = isLoggedIn(props.user_id)
 
     useEffect(() => {
         dispatch(fetchSinglePost(props.id))
@@ -132,6 +134,7 @@ const Post = (props) => {
     }
     return(
         <>
+            {console.log(loggedIn, "logged in value")}
             {showLoading}
             {showErrors}
             {showPost}
