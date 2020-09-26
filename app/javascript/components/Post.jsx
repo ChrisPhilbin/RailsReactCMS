@@ -84,14 +84,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSinglePost } from './actions/PostsActions'
-import {getToken} from './actions/SessionActions'
+import {getToken, signInButton} from './actions/SessionActions'
 import {isLoggedIn} from './actions/SessionActions'
+import {editPostButton} from './actions/SessionActions'
+import {newPostButton} from './actions/SessionActions'
+import {adminButtons} from './actions/SessionActions'
 
 const Post = (props) => {
 
     const dispatch = useDispatch()
     const token = getToken()
     const loggedIn = isLoggedIn(props.user_id)
+    const editButton = editPostButton(props.id)
+    const signIn = signInButton
+    const buttons = adminButtons(props.id, token)
 
     useEffect(() => {
         dispatch(fetchSinglePost(props.id))
@@ -136,6 +142,7 @@ const Post = (props) => {
         <>
             {showLoading}
             {showErrors}
+            { loggedIn ? buttons : signIn}
             {showPost}
         </>
     )

@@ -1,3 +1,7 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+
 export const getToken = () => {
     document.querySelector('meta[name="csrf-token"]').content
 }
@@ -18,18 +22,25 @@ export const signInButton = (
     </div>
 )
 
-export const editPostButton = (post_id) => {
-    return(
-        <>
-            <Link to={'/posts/'+post_id+'/edit'} className="btn btn-primary" role="button">Edit post</Link>
-        </>
-    )
-}
+export const adminButtons = (post_id, token) => {
 
-export const deletePostButton = () => {
+    const deletePost = () => {
+        if (confirm('Are you sure you want to delete this post?')) {
+            let deleted = {
+                method: "DELETE",
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRF-Token': token
+                }
+            }
+            fetch('/api/v1/destroy/'+post_id, deleted)
+            .then(alert("Post deleted"))
+        }
+    }
+
     return(
         <>
-            <Button className="btn btn-primary" onClick={deletePost}>Remove post</Button>
+            <Link to={'/posts/'+post_id+'/edit'} className="btn btn-primary" role="button">Edit post</Link> <Link to={'/posts/new'} className="btn btn-primary" role="button">New post</Link> <Button className="btn btn-primary" onClick={deletePost}>Remove post</Button>
         </>
     )
 }
