@@ -22,6 +22,18 @@ export const signInButton = (
     </div>
 )
 
+export const loadingMessage = (
+    <div>
+        <h3>Loading... Please wait a moment...</h3>
+    </div>
+)
+
+export const errorMessage = (
+    <div>
+        <h3>Something went wrong... Please try again...</h3>
+    </div>
+)
+
 export const adminButtons = (post_id, token) => {
 
     const deletePost = () => {

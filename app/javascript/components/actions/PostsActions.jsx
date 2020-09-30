@@ -42,12 +42,12 @@ export const getPostsFailure = () => (
     { type: GET_POSTS_FAILURE }
 )
 
-export const fetchPosts = (category_id) => {
+export const fetchAllPosts = () => {
     return (dispatch) => {
         dispatch(getPosts())
-            fetch('/api/v1/categories/'+category_id)
+            fetch('/api/v1/posts/index')
             .then(response => response.json())
-            .then(data => dispatch(getPostSuccess(data.posts)))
+            .then(data => dispatch(getPostsSuccess(data)))
             .catch(getPostsFailure())
     }
 }
