@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 export const getToken = () => {
-    document.querySelector('meta[name="csrf-token"]').content
+    return( document.querySelector('meta[name="csrf-token"]').content )
 }
 
 export const isLoggedIn = (user_id) => {
