@@ -55,7 +55,8 @@ export function fetchCategory(category_id) {
 }
 
 export function deleteCategory(token, category_id) {
-    debugger;
+    console.log(token, "token from deleteCategory function")
+    console.log(category_id, "category_id from deleteCategory function")
     if (confirm("WARNING! Removing this category will also remove all posts associated with it!")) {
         let deleted = {
             method: "DELETE",

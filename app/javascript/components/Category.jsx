@@ -11,9 +11,6 @@ const Category = (props) => {
     const token = getToken()
     const category_id = props.category_id
 
-    console.log(token, "token")
-    console.log(category_id, "category_id")
-
     const category  = useSelector(state => state.categories.selectedCategory.name)
     const posts     = useSelector(state => state.categories.selectedCategory.posts)
     const loading   = useSelector(state => state.categories.loading)

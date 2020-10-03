@@ -77,3 +77,39 @@ export const deletePost = (token, post_id) => {
         .then(alert("Post deleted"))
     }
 }
+
+//CREATE A POST
+
+export const createPost = (postTitle, postBody, user, category, token) => {
+    event.preventDefault()
+    const url = "/api/v1/posts/create"
+
+    if (postTitle.length == 0 || postBody.length == 0)
+        return
+
+    const requestBody = {
+        title: postTitle,
+        body: postBody,
+        user_id: user,
+        category_id: category
+    }
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "X-CSRF-Token": token,
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(requestBody)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        }
+        throw new Error("Network response not ok")
+    })
+    .then(props.props.history.push('/'))
+    .catch(error => console.log(error.message))
+
+}
