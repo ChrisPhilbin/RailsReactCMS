@@ -80,8 +80,8 @@ export const deletePost = (token, post_id) => {
 
 //CREATE A POST
 
-export const createPost = (postTitle, postBody, user, category, token) => {
-    event.preventDefault()
+export const createPost = (token) => {
+
     const url = "/api/v1/posts/create"
 
     if (postTitle.length == 0 || postBody.length == 0)

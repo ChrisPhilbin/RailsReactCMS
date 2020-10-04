@@ -90,17 +90,29 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCategories } from './actions/CategoriesActions'
+import { createPost } from './actions/PostsActions'
+import { getToken } from './actions/SessionActions'
 
 
 const NewPost = (props) => {
 
     const dispatch = useDispatch()
+    const token = getToken()
 
     const categories = useSelector(state => state.categories.allCategories)
+
+    const [selectedCategory, setSelectedCategory] = useState("")
+    const [postBody, setPostBody] = useState("")
+    const [postTitle, setPostTitle] = useState("")
     
     useEffect(() => {
-        dispatchEvent(getCategories)
+        dispatch(getCategories())
     }, [])
+
+    const onFormSubmit = (event) => {
+        event.preventDefault()
+        
+    }
 
     return(
         <>
