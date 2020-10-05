@@ -80,19 +80,19 @@ export const deletePost = (token, post_id) => {
 
 //CREATE A POST
 
-export const createPost = (token) => {
+export const createPost = (token, requestBody) => {
 
     const url = "/api/v1/posts/create"
 
-    if (postTitle.length == 0 || postBody.length == 0)
+    if (requestBody.title.length == 0 || requestBody.body.length == 0)
         return
 
-    const requestBody = {
-        title: postTitle,
-        body: postBody,
-        user_id: user,
-        category_id: category
-    }
+    // const requestBody = {
+    //     title: postTitle,
+    //     body: postBody,
+    //     user_id: user,
+    //     category_id: category
+    // }
 
     fetch(url, {
         method: "POST",
@@ -109,7 +109,6 @@ export const createPost = (token) => {
         }
         throw new Error("Network response not ok")
     })
-    .then(props.props.history.push('/'))
     .catch(error => console.log(error.message))
 
 }
