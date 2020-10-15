@@ -16,7 +16,7 @@ export default function categoriesReducer(state = initialState, action) {
         case actions.GET_CATEGORIES:
             return { ...state, loading: true}
         case actions.GET_CATEGORIES_SUCCESS:
-            return { ...state, loading: false, hasErrors: false, allCategories: state.allCategories.concat(action.payload)}
+            return { ...state, loading: false, hasErrors: false, allCategories: action.payload}
         case actions.GET_CATEGORIES_FAILURE:
             return { ...state, loading: false, hasErrors: true}
         default:

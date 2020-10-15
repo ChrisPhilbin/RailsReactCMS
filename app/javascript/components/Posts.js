@@ -72,13 +72,19 @@ const Posts = () => {
 
     const dispatch = useDispatch()
 
-    const posts     = useSelector(state => state.posts.allPosts)
-    const loading   = useSelector(state => state.posts.loading)
-    const hasErrors = useSelector(state => state.posts.hasErrors)
+    let posts     = useSelector(state => state.posts.allPosts)
+    let loading   = useSelector(state => state.posts.loading)
+    let hasErrors = useSelector(state => state.posts.hasErrors)
 
     useEffect(() => {
         dispatch(fetchAllPosts())
     }, [])
+
+    useEffect(() => {
+        return () => {
+            posts = []
+        }
+    })
 
     let showPosts
     

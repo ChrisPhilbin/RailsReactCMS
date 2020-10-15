@@ -140,7 +140,7 @@ const NewPost = (props) => {
                      <label htmlFor="postBody">Post Body</label>
                      <textarea name="postBody" className="form-control" value={postBody} onChange={(e) => setPostBody(e.target.value)}></textarea>
                  </div>
-                 <button type="submit" className="btn btn-primary" onClick={onFormSubmit}>Submit</button>
+                 <button type="submit" className="btn btn-primary">Submit</button>
              </form>
          </div>
         </>
