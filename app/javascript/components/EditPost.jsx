@@ -92,10 +92,10 @@
 //                 <label htmlFor="postTitle">Post Title</label>
 //                 <input type="text" className="form-control" name="postTitle" defaultValue={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
 //             </div>
-//             <div className="form-group">
 //                 <label htmlFor="postBody">Post Body</label>
 //                 <textarea name="postBody" className="form-control" defaultValue={postBody} onChange={(e) => setPostBody(e.target.value)}></textarea>
-//             </div>
+//              <div className="form-group">
+//            </div>
 //             <button type="submit" className="btn btn-primary" onClick={onFormSubmit}>Submit</button>
 //         </form>
 //     </div>
@@ -118,7 +118,11 @@ const EditPost = (props) => {
     const post_id = props.id
     const token = getToken()
 
-    const post       = useSelector(state => state.posts.selectedPost)
+    const [postCategory, setPostCategory] = useState(useSelector(state => state.posts.selectedPost.posted_in))
+    const [postTitle, setPostTitle]       = useState(useSelector(state => state.posts.selectedPost.title))
+    const [postBody, setPostBody]         = useState(useSelector(state => state.posts.selectedPost.body))
+
+    // const post       = useSelector(state => state.posts.selectedPost)
     const categories = useSelector(state => state.categories.allCategories)
 
     useEffect(() => {
@@ -126,9 +130,38 @@ const EditPost = (props) => {
         getCategories()
     },[])
 
+    const onFormSubmit = () => {
+
+    }
+
+    const displaySelect = (
+        categories.map((category) => (
+            <option value={category.id} key={category.id}>{category.name}</option>
+        ))
+    )
+
     return(
-        <>
-        </>
+
+        <div key={props.id}>
+            <form onSubmit={onFormSubmit}>
+                <div className="form-group">
+                    <label htmlFor="postCategory">Category</label>
+                    <select defaultValue={post.posted_in} name="postCategory" onChange={(e) => setPostCategory(e.target.value)}>
+                        {displaySelect}
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="postTitle">Post Title</label>
+                    <input type="text" className="form-control" name="postTitle" defaultValue={post.title} onChange={(e) => setPostTitle(e.target.value)} />
+                </div>
+                    <label htmlFor="postBody">Post Body</label>
+                    <textarea name="postBody" className="form-control" defaultValue={post.body} onChange={(e) => setPostBody(e.target.value)}></textarea>
+                <div className="form-group">
+            </div>
+                <button type="submit" className="btn btn-primary" onClick={onFormSubmit}>Submit</button>
+            </form>
+        </div>
+
     )
 }
 
