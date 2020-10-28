@@ -6,9 +6,11 @@ import Post from "../components/Post"
 import NewPost from "../components/NewPost"
 import EditPost from "../components/EditPost"
 import TopNav from "../components/navigation/TopNav"
+import SideBar from '../components/navigation/SideBar'
 import Category from '../components/Category'
 import NewCategory from "../components/NewCategory"
 import Categories from "../components/Categories"
+
 
 
 const Routes = (props) => {
@@ -34,7 +36,7 @@ const Routes = (props) => {
         </div>
 
         <div className="col-lg-4">
-          <h4>Categories</h4>
+          <SideBar />
         </div>
       </div>
     </Router>
