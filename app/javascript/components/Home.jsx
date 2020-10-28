@@ -25,25 +25,21 @@ const App = () => {
   }
 
   if (allPosts.length > 0) {
+    console.log(allPosts)
     showPosts = ( allPosts.map((post, index) => (
-      <div key={index} className="col-md-6 col-lg-4">
-          <div className="card mb-4">
-              <div className="card-body">
-                  <h5 className="card-title">
-                      <Link to={'/posts/' + post.id}>{post.title}</Link>
-                  </h5>
-              </div>
-          </div>
+      <div key={index}>
+        <h3 className="mt-4">
+            <Link to={'/posts/' + post.id}>{post.title}</Link>
+        </h3>
+        <p>{post.body}</p>
       </div>
     )))
   }
 
   return(
-    <div className="py-5">
-      <div className="row">
-        {status}
-        {showPosts}
-      </div>
+    <div className="posts-row">
+      {status}
+      {showPosts}
     </div>
   )
 }

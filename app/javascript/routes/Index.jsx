@@ -18,16 +18,25 @@ const Routes = (props) => {
   return(
     <Router>
       <TopNav user_id={id} />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route exact path="/posts" render={ () => <Posts user_id={id} />} />
-        <Route exact path="/posts/new" render={ (props) => <NewPost user_id={id} props={props} />} />
-        <Route exact path="/posts/:id" render={ (props) => <Post id={props.match.params.id} user_id={id} />} />
-        <Route exact path="/posts/:id/edit" render={ (props) => <EditPost id={props.match.params.id} />} />
-        <Route exact path="/categories" render={ () => <Categories />} />
-        <Route exact path="/categories/new" render={ () => <NewCategory />} />
-        <Route exact path="/categories/:id" render={ (props) => <Category category_id={props.match.params.id} />} />
-      </Switch>
+
+      <div className="row">
+        <div className="col-lg-8">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route exact path="/posts" render={ () => <Posts user_id={id} />} />
+            <Route exact path="/posts/new" render={ (props) => <NewPost user_id={id} props={props} />} />
+            <Route exact path="/posts/:id" render={ (props) => <Post id={props.match.params.id} user_id={id} />} />
+            <Route exact path="/posts/:id/edit" render={ (props) => <EditPost id={props.match.params.id} />} />
+            <Route exact path="/categories" render={ () => <Categories />} />
+            <Route exact path="/categories/new" render={ () => <NewCategory />} />
+            <Route exact path="/categories/:id" render={ (props) => <Category category_id={props.match.params.id} />} />
+          </Switch>
+        </div>
+
+        <div className="col-lg-4">
+          <h4>Categories</h4>
+        </div>
+      </div>
     </Router>
   )
 }

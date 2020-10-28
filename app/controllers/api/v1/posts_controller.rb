@@ -10,6 +10,9 @@ class Api::V1::PostsController < ApplicationController
   def latest
      posts = Post.last(5)
      if posts
+      #  posts.each do |post|
+      #   posted_by = User.find(post.user_id).email
+      #   posted_in = Category.find(post.category_id).name
        render json: posts
      else
       render json: posts.errors
