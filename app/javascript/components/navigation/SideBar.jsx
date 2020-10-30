@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchCategories } from '../actions/CategoriesActions'
+import { Loading } from 'images/loading.gif'
 
 const SideBar = () => {
 
@@ -15,7 +16,13 @@ const SideBar = () => {
     const loading    = useSelector(state => state.categories.loading)
     const hasErrors  = useSelector(state => state.categories.hasErrors)
 
-    let showCategories
+    let showCategories, showLoading
+
+    if (loading) {
+        showLoading = (
+            <img src={Loading} />
+        )
+    }
 
     if (categories.length > 0) {
         showCategories = (
@@ -29,6 +36,7 @@ const SideBar = () => {
 
     return(
         <div className="categories-column">
+            {showLoading}
             {showCategories}
         </div>
     )
