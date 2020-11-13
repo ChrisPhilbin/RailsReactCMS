@@ -55,12 +55,12 @@ const Post = (props) => {
         )
     }
     return(
-        <>
+        <div className="post-row">
             {showLoading}
             {showErrors}
             { loggedIn ? buttons : signIn}
             {showPost}
-        </>
+        </div>
     )
 }
 

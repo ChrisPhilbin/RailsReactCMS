@@ -4,8 +4,25 @@ body {
   padding-top: 15px;
 }
 
+.categories-widget {
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.post-row {
+  padding: 15px 35px 15px;
+}
+
 .posts-row {
   padding: 15px 35px 15px;
+}
+
+.side-bar {
+  padding:  20px 20px;
 }
 
 .bg_primary-color {

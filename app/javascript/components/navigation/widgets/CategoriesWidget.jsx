@@ -35,7 +35,8 @@ const CategoriesWidget = () => {
     }
 
     return(
-        <div className="categories-column">
+        <div className="categories-widget">
+            <h4>Catgories</h4>
             {showLoading}
             {showCategories}
         </div>

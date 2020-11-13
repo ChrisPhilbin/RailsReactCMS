@@ -35,7 +35,7 @@ const Routes = (props) => {
           </Switch>
         </div>
 
-        <div className="col-lg-4">
+        <div className="col-lg-4 side-bar">
           <SideBar />
         </div>
       </div>
